@@ -7,6 +7,14 @@ unsupported units, non-positive readings or results outside representable
 numeric limits. In particular, very large or very small finite readings may
 still produce an unrepresentable conversion or ratio.
 
+This is the Python fabric-care API. The separate
+`JavaScript Sewing Math package <https://www.npmjs.com/package/@sewingselami/sewlore-sewing-math>`_
+handles stretch/recovery and print-scale comparison. Its unit conversion
+supports only ``cm``/``in`` and signed finite inputs, including zero, while
+Python ``convert_length`` supports ``cm``/``mm``/``in`` and requires a positive
+length. The JavaScript stretch/print functions still require positive lengths.
+Do not substitute either conversion contract for the other.
+
 Bounded submission
 ------------------
 

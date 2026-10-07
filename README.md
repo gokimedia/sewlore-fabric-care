@@ -2,18 +2,20 @@
 
 A dependency-free Python API and local command-line tool for checking paired fabric-care readings before comparing them. It produces accepted records and correction notes as separate CSV files. The template contains only the header; examples and test fixtures are explicitly hypothetical software inputs, not measurements of fabric.
 
-Read the [Fabric Measurement Guide: Stretch, Recovery and Care](https://sewlore.com/pages/fabric-measurement-methods-guide) for the recording method and limits of the calculations. An [interactive CSV validator](https://sewlore-fabric-care-validator.streamlit.app/) is available separately; this package does not require Streamlit or upload data to that service.
+Read the [Fabric Measurement Guide: Stretch, Recovery and Care](https://sewlore.com/pages/fabric-measurement-methods-guide) for the recording method and limits of the calculations. Find the [published 0.1.0 package on PyPI](https://pypi.org/project/sewlore-fabric-care/0.1.0/), [current documentation on Read the Docs](https://sewlore-fabric-care.readthedocs.io/en/latest/) and [this distribution's source repository](https://github.com/gokimedia/sewlore-fabric-care). An [interactive CSV validator](https://sewlore-fabric-care-validator.streamlit.app/) is available separately; this package does not require Streamlit or upload data to that service.
 
 ## Install and run locally
 
-Use Python 3.10 or later. Python 3.12 is the checked local environment. Install this project from its checkout or a built wheel:
+Use Python 3.10 or later. Python 3.12 is the checked environment. Install the published version from PyPI:
 
 ```sh
-python -m pip install .
+python -m pip install sewlore-fabric-care==0.1.0
 sewlore-fabric-care --version
 sewlore-fabric-care template --output blank.csv
 sewlore-fabric-care validate readings.csv --accepted accepted.csv --corrections corrections.csv
 ```
+
+Create `blank.csv`, fill it with your own anonymous records, then supply that filled file as `readings.csv`. Keep the exact header and leave the notes field empty. Install from a checkout with `python -m pip install .` only when deliberately working on that source revision.
 
 The equivalent module invocation is `python -m sewlore_fabric_care`. Use `-` as the input for stdin or as **one** output destination for stdout. Both result destinations are required; their headers are written even when there are no records. Stdout contains only the selected CSV; stderr contains counts or a command error, not source readings.
 
@@ -29,6 +31,16 @@ Existing output files are refused unless `--overwrite` is explicit. The two dest
 | `0` | No correction entries, including a valid header-only input. |
 | `1` | Correction entries exist; separate exports were written. |
 | `2` | Usage, path or I/O error; exports may be absent or partial. |
+
+## Choose the appropriate tool
+
+| Need | Tool and input contract |
+|---|---|
+| Check several paired fabric-care records and export accepted/correction CSVs locally | This Python API/CLI: four positive finite readings per row, matching `cm`, `mm` or `in` units, and the anonymous-record policy below. |
+| Check one paired length/width change in a browser | [Fabric Shrinkage Calculator](https://sewlore-fabric-shrinkage.web.app/): positive readings; rectangular area is optional. |
+| Add stretch/recovery or two-axis print-scale calculations to JavaScript | [`@sewingselami/sewlore-sewing-math` 0.1.0](https://www.npmjs.com/package/@sewingselami/sewlore-sewing-math): plain positive lengths in one consistent unit. Its separate `convertLength` helper supports only `cm`/`in` and allows signed finite input values, including zero. |
+
+Python `convert_length` supports `cm`/`mm`/`in` and rejects zero or negative lengths. The JS conversion helper has a different contract; its signed-offset behaviour does not relax the positive-reading rules of stretch or print calculations. The JS package does not validate whole CSV files or calculate fabric-care area change. This Python package does not calculate stretch/recovery or PDF print errors.
 
 ## Strict default policy
 
@@ -76,11 +88,11 @@ python -B -m unittest discover -s tests -v
 python -m sphinx -W --keep-going -b html docs _build/html
 ```
 
-Checks exercise the installed API, console entrypoint, file/stdin exports, exit codes, malformed and rejected inputs, unit handling, quoted CSV and overwrite protection. They use invented inputs. See [CSV recording context](https://sewlore-preparation-notes.blogspot.com/2026/10/what-to-record-before-cutting-fabric.html) and the [browser-local shrinkage calculator](https://sewlore-fabric-shrinkage.web.app/) for complementary workflows.
+Checks exercise the installed API, console entrypoint, file/stdin exports, exit codes, malformed and rejected inputs, unit handling, quoted CSV and overwrite protection. They use invented inputs. The live [CLI quickstart](https://sewlore-fabric-care.readthedocs.io/en/latest/quickstart.html) and [API reference](https://sewlore-fabric-care.readthedocs.io/en/latest/api.html) cover the same input contracts. See [CSV recording context](https://sewlore-preparation-notes.blogspot.com/2026/10/what-to-record-before-cutting-fabric.html) for method notes to keep separately.
 
 ## Source, provenance and licence
 
-The calculation core comes unchanged from the [Fabric-Care CSV Validator v1.0.0 release](https://github.com/gokimedia/sewlore-fabric-care-validator/releases/tag/v1.0.0), commit `1db7b9a4fc8da8a109d6b40e125387752583c8bb`. Its input policy changes only the import to a package-relative path. Distribution version **0.1.0** adds the API packaging, local CLI and documentation; it is distinct from that original software version. The [original source repository](https://github.com/gokimedia/sewlore-fabric-care-validator) and its software DOI identify the original release, not a DOI assigned to this new distribution.
+The calculation core comes unchanged from the [Fabric-Care CSV Validator v1.0.0 release](https://github.com/gokimedia/sewlore-fabric-care-validator/releases/tag/v1.0.0), commit `1db7b9a4fc8da8a109d6b40e125387752583c8bb`. Its input policy changes only the import to a package-relative path. Distribution version **0.1.0** adds the API packaging, local CLI and documentation; it is distinct from that original software version. The [original source repository](https://github.com/gokimedia/sewlore-fabric-care-validator) and its software DOI identify the original release, not a DOI assigned to this new distribution. Live repository/docs updates may follow publication; the PyPI 0.1.0 files retain the code and embedded metadata uploaded for that version.
 
 Original code and documentation © 2026 Sewlore, MIT licence in `LICENSE.txt`, for any applicable copyright. Development and documentation were AI-assisted with OpenAI Codex. No individual author, academic affiliation, laboratory study, physical measurement dataset, peer review or human visual review is claimed. The licence grants no trademark ownership or platform endorsement.
 

@@ -8,11 +8,21 @@ the input policy changes one import to a package-relative path. This
 distribution adds a local CLI, an installable API and these documents.
 Its version and source archive are separate from the original release.
 
+The `PyPI 0.1.0 files <https://pypi.org/project/sewlore-fabric-care/0.1.0/>`_
+were built and published from distribution-source commit
+``5eb88ca82ec4f9536447ac68fe27482d56de3e27``. The
+`live repository <https://github.com/gokimedia/sewlore-fabric-care>`_
+and `latest Read the Docs edition <https://sewlore-fabric-care.readthedocs.io/en/latest/>`_
+can receive documentation and project-link updates after that upload.
+These updates do not replace the published version's files or claim that its
+embedded metadata has changed. Record the installed version and source revision
+you actually use.
+
 The original software is preserved as
 `DOI 10.5281/zenodo.23193335 <https://doi.org/10.5281/zenodo.23193335>`_.
 That DOI identifies the original software archive, not a new DOI for this
-distribution or an educational paper. The original archive/tag is not modified
-by package preparation.
+distribution or an educational paper. It remains the reference for the
+archived v1.0.0 source, separate from this distribution.
 
 Retain the distribution version, Python version, source readings, units,
 rectangle assumption and original method notes when comparing results.

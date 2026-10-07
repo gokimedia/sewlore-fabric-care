@@ -1,0 +1,5 @@
+include LICENSE.txt README.md pyproject.toml .readthedocs.yaml .gitignore requirements-build.txt
+recursive-include docs *.rst *.py
+recursive-include examples *.csv
+recursive-include tests *.py
+recursive-include src *.py

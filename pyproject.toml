@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools==84.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sewlore-fabric-care"
+version = "0.1.0"
+description = "Local, bounded CSV validation and signed fabric-care calculations."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE.txt"]
+authors = [{name = "Sewlore"}]
+maintainers = [{name = "Sewlore"}]
+keywords = ["csv", "validation", "fabric-care", "measurement", "unit-conversion"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent",
+  "Topic :: Utilities",
+]
+dependencies = []
+
+[project.optional-dependencies]
+docs = ["Sphinx==9.1.0"]
+
+[project.urls]
+"Measurement guide" = "https://sewlore.com/pages/fabric-measurement-methods-guide"
+"Original validator source" = "https://github.com/gokimedia/sewlore-fabric-care-validator"
+"Original software release" = "https://github.com/gokimedia/sewlore-fabric-care-validator/releases/tag/v1.0.0"
+"Interactive validator" = "https://sewlore-fabric-care-validator.streamlit.app/"
+
+[project.scripts]
+sewlore-fabric-care = "sewlore_fabric_care.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["sewlore_fabric_care*"]
+namespaces = false

@@ -1,0 +1,5 @@
+# Packaging/documentation tools only; the runtime has no dependencies.
+build==1.6.1
+setuptools==84.0.0
+wheel==0.48.0
+Sphinx==9.1.0
